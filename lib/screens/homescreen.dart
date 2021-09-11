@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<String> _todoList = <String>[];
   final TextEditingController _textFieldController = TextEditingController();
+  int todoCount=0;
 
   void addItemToList(String text) {
     setState(() {
@@ -44,6 +45,13 @@ class _HomePageState extends State<HomePage> {
                   ElevatedButton(
                     onPressed: () {
                       addItemToList(_textFieldController.text);
+                      todoCount++;
+                      final snackBar = SnackBar(
+                          margin: const EdgeInsets.all(16.0),
+                          behavior: SnackBarBehavior.floating,
+                          content:  Text('Added $todoCount todo'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       Navigator.pop(context);
                     },
                     child: Text('ADD'),
